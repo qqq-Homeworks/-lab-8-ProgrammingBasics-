@@ -12,3 +12,5 @@ double **CreateMatrix(int);
 void DestructMatrix(double **, int);
 
 void PrintMatrix(double **, int, int, bool, int);
+
+void PrintMatrix(int[10][10]);
