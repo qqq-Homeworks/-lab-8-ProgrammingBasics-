@@ -65,64 +65,43 @@ void PrintMatrix(double **matrix, int n, int m, bool isScientific, int precision
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     int count = 0;
-    if (isScientific)
+    int widthq = precision + 4 + 5 * isScientific;
+    int z = 0;
+    int q = 0;
+    count = w.ws_col / widthq;
+    for (z = 0; z < m / count; z++)
     {
-        int z = 0;
-        int q = 0;
-        count = w.ws_col / (precision + 9);
-        for (z = 0; z < m / count; z++)
+        for (size_t i = 0; i < n; i++)
         {
-            for (size_t i = 0; i < n; i++)
+            for (size_t j = count * z; j < count * (z + 1); j++)
             {
-                for (size_t j = count * z; j < count * (z + 1); j++)
+                if (isScientific)
                 {
-                    std::cout << std::scientific << std::setprecision(precision) << std::setw(precision + 9) << matrix[i][j];
-                    q = j;
+                    std::cout << std::scientific << std::setprecision(precision) << std::setw(widthq) << matrix[i][j];
                 }
-                std::cout << std::endl;
+                else
+                    std::cout << std::fixed << std::setprecision(precision) << std::setw(widthq) << matrix[i][j];
+
+                q = j;
             }
             std::cout << std::endl;
         }
-        if (q + 1 < m)
-        {
-            for (size_t i = 0; i < n; i++)
-            {
-                for (size_t j = q + 1; j < m; j++)
-                {
-                    std::cout << std::scientific << std::setprecision(precision) << std::setw(precision + 9) << matrix[i][j];
-                }
-                std::cout << std::endl;
-            }
-        }
+        std::cout << std::endl;
     }
-    else
+    if (q + 1 < m)
     {
-        int z = 0;
-        int q = 0;
-        count = w.ws_col / (precision + 4);
-        for (int z = 0; z < m / count; z++)
+        for (size_t i = 0; i < n; i++)
         {
-            for (size_t i = 0; i < n; i++)
+            for (size_t j = q + 1; j < m; j++)
             {
-                for (size_t j = count * z; j < count * (z + 1); j++)
+                if (isScientific)
                 {
-                    std::cout << std::fixed << std::setprecision(precision) << std::setw(precision + 4) << matrix[i][j];
-                    q = j;
+                    std::cout << std::scientific << std::setprecision(precision) << std::setw(widthq) << matrix[i][j];
                 }
-                std::cout << std::endl;
+                else
+                    std::cout << std::fixed << std::setprecision(precision) << std::setw(widthq) << matrix[i][j];
             }
             std::cout << std::endl;
-        }
-        if (q + 1 < m)
-        {
-            for (size_t i = 0; i < n; i++)
-            {
-                for (size_t j = q + 1; j < m; j++)
-                {
-                    std::cout << std::fixed << std::setprecision(precision) << std::setw(precision + 4) << matrix[i][j];
-                }
-                std::cout << std::endl;
-            }
         }
     }
 }
