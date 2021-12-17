@@ -16,7 +16,7 @@ int main()
 
     DestructMatrix(matrix, n);
 
-    int B[10][10];
+    double B[10][10];
     for (size_t i = 0; i < 10; i++)
     {
         for (size_t j = 0; j < 10; j++)
@@ -24,9 +24,15 @@ int main()
             B[i][j] = i * 10 + j;
         }
     }
-    PrintMatrix(B);
-    
-    std::cout << B << "  " << B[0] << "  " << B[2] << std::endl;
+    double **D = new double *[10];
+    for (int i = 0; i < 10; i++)
+        D[i] = B[i];
+
+    PrintMatrix(D, 10, 10, 0, 0);
+    int q = 0;
+    std::cout << B << std::endl;
+    std::cin >> q;
+    std::cout << B[0] << "  " << B[2] << std::endl;
     std::cout << B[0][0] << "  " << **B << "  " << *B[0] << std::endl;
     std::cout << *(*(B + 1)) << "  " << *B[1] << std::endl;
     std::cout << *(B[0] + 1) << "  " << *(*B + 1) << std::endl;

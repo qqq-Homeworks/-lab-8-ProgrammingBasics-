@@ -46,20 +46,6 @@ void DestructMatrix(double **matrix, int N)
     delete[] matrix;
 }
 
-void PrintMatrix(int matrix[10][10])
-{
-    std::cout << std::endl;
-    for (size_t i = 0; i < 10; i++)
-    {
-        for (size_t j = 0; j < 10; j++)
-        {
-            std::cout << std::setw(4) << matrix[i][j];
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-}
-
 void PrintMatrix(double **matrix, int n, int m, bool isScientific, int precision)
 {
     struct winsize w;
