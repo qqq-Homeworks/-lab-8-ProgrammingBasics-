@@ -29,12 +29,5 @@ int main()
         D[i] = B[i];
 
     PrintMatrix(D, 10, 10, 0, 0);
-    int q = 0;
-    std::cout << B << std::endl;
-    std::cin >> q;
-    std::cout << B[0] << "  " << B[2] << std::endl;
-    std::cout << B[0][0] << "  " << **B << "  " << *B[0] << std::endl;
-    std::cout << *(*(B + 1)) << "  " << *B[1] << std::endl;
-    std::cout << *(B[0] + 1) << "  " << *(*B + 1) << std::endl;
-    std::cout << B[0][20] << "  " << *(B[0] + 20) << "  " << *B[2] << std::endl;
+    DestructMatrix(D,10);
 }
